@@ -1,34 +1,29 @@
 import random
 
-# Gera um número aleatório entre 1 e 10
+# Configurações iniciais
 numero_secreto = random.randint(1, 10)
-tentativas = 0
-max_tentativas = 5
+tentativas_restantes = 5
+tentativa_atual = 1
 
-print("Bem-vindo ao jogo de adivinhação!")
-print("Tente adivinhar o número que estou pensando, entre 1 e 10.")
+print("--- Jogo de Adivinhação ---")
+print("Tente adivinhar o número entre 1 e 10.")
 
-# Loop do jogo
-while tentativas < max_tentativas:
-    # Captura a entrada do usuário
-    palpite = int(input("Digite seu palpite: "))
+while tentativa_atual <= tentativas_restantes:
+    print(f"\nTentativa {tentativa_atual} de {tentativas_restantes}")
+    chute = int(input("Digite seu palpite: "))
 
-    # Incrementa o número de tentativas
-    tentativas += 1
-
-    # Verifica o palpite do jogador
-    if palpite == numero_secreto:
-        print(f"Parabéns! Você acertou o número em {tentativas} tentativas.")
+    if chute == numero_secreto:
+        print(f"Parabéns! Você acertou o número {numero_secreto}!")
         break
-    elif palpite < numero_secreto:
-        print("Quase lá! Tente um número maior.")
     else:
-        print("Quase lá! Tente um número menor.")
-
-    # Informa ao jogador quantas tentativas restam
-    if tentativas < max_tentativas:
-        print(f"Você tem {max_tentativas - tentativas} tentativas restantes.")
-
-else:
-    print("Infelizmente, você não acertou. O número era", numero_secreto)
-    print("Fim do jogo!")
+        # Lógica do bônus: diferença de apenas 1 unidade
+        if abs(chute - numero_secreto) == 1:
+            tentativas_restantes += 1
+            print("Você chegou muito perto! Ganhou +1 tentativa de bônus.")
+        
+        if tentativa_atual == tentativas_restantes:
+            print(f"Suas tentativas acabaram. O número era {numero_secreto}.")
+        else:
+            print("Errado! Tente novamente.")
+    
+    tentativa_atual += 1
