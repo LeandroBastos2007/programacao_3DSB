@@ -1,1 +1,29 @@
 
+import random
+
+# Gera um número aleatório entre 1 e 10
+numero_secreto = random.randint(1, 10)
+max_tentativas = 5
+
+print("Bem-vindo ao jogo de adivinhação!")
+print("Tente adivinhar o número que estou pensando, entre 1 e 10. Você tem 5 tentativas.")
+
+# Loop do jogo com um número fixo de tentativas
+for tentativa in range(max_tentativas):
+    # Captura a entrada do usuário
+    palpite = int(input(f"Tentativa {tentativa + 1}/{max_tentativas}. Digite seu palpite: "))
+
+    # Verifica o palpite do jogador
+    if palpite == numero_secreto:
+        print(f"Parabéns! Você acertou o número em {tentativa + 1} tentativas.")
+        break
+    elif palpite < numero_secreto:
+        print("Quase lá! Tente um número maior.")
+    else:
+        print("Quase lá! Tente um número menor.")
+
+    # Checa se esta é a última tentativa
+    if tentativa == max_tentativas - 1:
+        print(f"Suas tentativas acabaram. O número era {numero_secreto}.")
+
+print("Fim do jogo!")
